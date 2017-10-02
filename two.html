@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="resources/style.css">
+    <script type='text/javascript' src='resources/jquery-3.2.1.js'></script>
+    <script type='text/javascript' src='resources/dist/jquery.validate.js'></script>
+</head>
+
+<body>
+    <a href="index.html" class="nav">Index</a>
+    <p>This is for messing with Jquery Validation</p>
+    <form id="testForm" method="get" action="">
+        <label>Field</label><input name="textField" type="text" /><br>
+        <label>Field2</label><input name="textField2" type="text" /><br>        
+        <button type="submit" value="Submit">Submit</button>
+    </form>
+</body>
+
+<script>
+    // $("#Field").rules("add", {
+    //     minlength: 5
+    // });
+    $("#testForm").validate({
+        rules: {
+            'textField': {required: true}
+        },
+        messages: {
+            'textField': { required: 'sup?' }
+        }
+    });    
+    $("[name='textField2']").rules('add',{
+        required:true,
+        number:true,
+        minlength: 3
+    });
+</script>
+</html>
