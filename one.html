@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <a href="index.html" class="nav">Index</a>
+</body>
+
+<script>
+    var Car = function(color) {
+        var self = this;
+        this.Color = color;
+        this.Drive = function() {
+            console.log('vrooom');
+            console.log(this.caller);
+        }
+        this.GetColor = function() {
+            console.log(self.Color);
+        }
+    }
+
+    var TL = new Car('copper');
+    var MDX = new Car('black');
+
+    console.log(`The TL is ${TL.Color}`);
+    console.log(`The MDX is ${MDX.Color}`);
+    TL.GetColor();
+    TL.GetColor.apply({ Color: 'rust' });
+    //TL.Drive();
+    
+    Car.Driver = function() {
+        console.log('Put put put');
+    }
+
+    Car.prototype.Driver = function() {
+        console.log('zoom');
+    }
+    
+    MDX.Drive();
+
+    var Corolla = new Car('white');
+
+    // Car.Driver();
+    // Corolla.Driver();
+    // MDX.Driver();
+    
+    MDX.Driver();
+</script>
+
+</html>

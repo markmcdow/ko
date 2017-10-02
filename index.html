@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">    
+    <script type='text/javascript' src='knockout-3.4.2.js'></script>        
+</head>
+
+<body>
+    <a href="one.html" class="nav">One</a>
+    <div id="main">
+        <span type="text" data-bind="html: Surname"></span>
+        <input type="text" id="newMember" /><button data-bind="click: addMember">Add</button>       
+        <ul data-bind="foreach: Members">
+            <div><li data-bind="text: `${Name()} ${$parent.Surname}`"></li><a href="#" data-bind="click: $parent.removeMember">Remove</a></div>
+        </ul>
+    </div>
+
+</body>
+
+<script>
+
+    var Member = function(name) {
+        let self = this;
+        self.Name = ko.observable(name);
+
+        return self;
+    }
+
+    var Family = function(surname) {
+        let self = this;
+        self.Surname = surname;
+        self.Members = ko.observableArray([]);
+
+        self.addMember = function() {
+            let newInput = document.querySelector('#newMember');
+            let name = newInput.value;
+            self.Members.push(new Member(name));
+            newInput.value = '';
+            console.log(self.Members());
+        }
+
+        self.removeMember = function(data) {
+            console.log(data);
+            self.Members.remove(data);
+        }
+        
+        return self;
+    };
+
+    let main = document.querySelector('#main');
+    ko.applyBindings(new Family('McDow'),main);
+</script>
+
+</html>
